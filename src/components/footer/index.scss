@@ -1,0 +1,23 @@
+@import '../../style/common/custom.scss';
+@import '../../style/mixins/index.scss';
+.main-wrap{
+  font-size: 0;
+  .footer-logo,
+  .footer-copy{
+    @include displayInlineBlock;
+    position: relative;
+  }
+  .footer-img{
+    position: absolute;
+    top: 25px;
+  }
+  .footer-copy{
+    float: right;
+    .copy-txt{
+      font-size: $font-size-12;
+      line-height: $footer-height;
+      color: #fff;
+    }
+  }
+}
+@import './index-media.scss';
