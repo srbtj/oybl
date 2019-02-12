@@ -105,7 +105,7 @@ import mContact from '_c/contact'
 import mTrain from '_c/train'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import handleScroll from '../../mixins/index'
-console.log(handleScroll)
+
 const swiperOptions = {
   autoplay: true,
   loop: true,
