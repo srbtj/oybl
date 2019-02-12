@@ -1,0 +1,15 @@
+.train-city{
+  position: relative;
+  width: 100%;
+  height: 430px;
+  background: #283441;
+  &::before{
+    position: absolute;
+    left: 50%;
+    top: -16px;
+    content: '';
+    margin-left: -4px;
+    border: 8px solid transparent;
+    border-bottom-color: #283441;
+  }
+}
