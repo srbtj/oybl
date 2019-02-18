@@ -1,0 +1,12 @@
+@import '../../style/common/breadcrumb.scss';
+
+#main > .main-wrap{
+  display: flex;
+  border-right: 1px solid $breadcrumb-border-color;
+  .news-info-wrap{
+    width: 700px;
+    .news-item{
+      border-bottom: 1px solid $breadcrumb-border-color;
+    }
+  }
+}

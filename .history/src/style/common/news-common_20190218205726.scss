@@ -1,0 +1,7 @@
+#main > .main-wrap{
+  display: flex;
+  .news-info-wrap{
+    width: 700px;
+    border-right: 1px solid $breadcrumb-border-color;
+  }
+}
