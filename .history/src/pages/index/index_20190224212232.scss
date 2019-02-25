@@ -161,6 +161,7 @@
         font-weight: bold;
         text-indent: 28px;
         height: 40px;
+        padding-left: 10px;
         .icon{
           position: absolute;
           color: #ee3232;
@@ -198,7 +199,6 @@
         .news-title{
           @include overflowHidden;
           max-width: 370px;
-          padding-left: 10px;
         }
         .news-date{
           position: absolute;

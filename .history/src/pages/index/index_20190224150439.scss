@@ -198,7 +198,6 @@
         .news-title{
           @include overflowHidden;
           max-width: 370px;
-          padding-left: 10px;
         }
         .news-date{
           position: absolute;

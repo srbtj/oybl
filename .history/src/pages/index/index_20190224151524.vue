@@ -45,7 +45,7 @@
             <ul class="news-list">
               <li class="news-item" v-for="(news, i) in newsArrs" :key="'news_' + i" @click="linkToNewsDetail(news.id)">
                 <div class="news-title">{{news.title}}</div>
-                <span class="news-date">{{news.date | dataFormat('yyyy/MM/dd')}}<i class="icon iconfont icon-gengduo"></i></span>
+                <span class="news-date">{{news.date}}<i class="icon iconfont icon-gengduo"></i></span>
               </li>
             </ul>
           </div>
@@ -106,7 +106,6 @@ import mTrain from '_c/train'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import handleScroll from '../../mixins/index'
 import api from '@/fetch/api'
-
 // console.log(api)
 const swiperOptions = {
   autoplay: true,
@@ -155,9 +154,10 @@ export default {
       })
     },
     getNewsArrs () {
-      api.getStickNews({pageSize: 4, pageNo: 1, type: 1, isPush: false}).then(res => {
+      api.getStickNews({pageSize: 1, pageNo: 4, type: 1, isPush: false}).then(res => {
+        console.log(res)
         let {list} = res
-        this.newsArrs = list
+        this.pushNews = list
       })
     }
   },

@@ -36,11 +36,11 @@ module.exports = {
         https: false,
         hotOnly: false,
         proxy: {
-            '/api': {
-                target: 'http://39.108.5.62:9091/',
+            '/xrf/': {
+                target: 'http://reg.tool.hexun.com/',
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api': ''
+                    '^/xrf': ''
                 }
             },
             '/wa/': {

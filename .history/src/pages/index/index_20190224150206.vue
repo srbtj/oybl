@@ -45,7 +45,7 @@
             <ul class="news-list">
               <li class="news-item" v-for="(news, i) in newsArrs" :key="'news_' + i" @click="linkToNewsDetail(news.id)">
                 <div class="news-title">{{news.title}}</div>
-                <span class="news-date">{{news.date | dataFormat('yyyy/MM/dd')}}<i class="icon iconfont icon-gengduo"></i></span>
+                <span class="news-date">{{news.date}}<i class="icon iconfont icon-gengduo"></i></span>
               </li>
             </ul>
           </div>
@@ -106,7 +106,6 @@ import mTrain from '_c/train'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import handleScroll from '../../mixins/index'
 import api from '@/fetch/api'
-
 // console.log(api)
 const swiperOptions = {
   autoplay: true,
@@ -128,14 +127,19 @@ export default {
     return {
       swiperOptions,
       news: { src: require('../../assets/news-img.png'), title: '“齐鲁号”零散集结班列首发齐鲁号零散集结班列首发', desc: '2018年12月22日，“齐鲁号”欧亚班列烟台首发仪式在烟台港集装箱码头隆重举行，烟台市委、市政府、烟台海关、山东高速物流集团、烟台车务段、烟台港集团等单位相关烟台市委、市政府、烟台海关、山东高速物流集团、烟台车务段、烟台港集团等单位相关…'},
-      newsArrs: [],
+      newsArrs: [
+        { title: '远东路桥中国区班列管理团队一行到访物流集团', id: 1, date: '2018-01-02'},
+        { title: '远东路桥中国区班列管理团队一行到访物流集团', id: 2, date: '2018-01-02'},
+        { title: '远东路桥中国区班列管理团队一行到访物流集团', id: 3, date: '2018-01-02'},
+        { title: '远东路桥中国区班列管理团队一行到访物流集团', id: 4, date: '2018-01-02'}
+      ],
       videoArrs: [
         { src: require('../../assets/video-img.png'), title: '“齐鲁号”零散集结班列首发', desc: '2018年12月22日，“齐鲁号”欧亚班列烟台首发仪式在烟台港集装箱码头隆重举行，烟台市委、市政府、烟台海关等单位相关负责同志出席了首发仪式。'},
         { src: require('../../assets/video-img.png'), title: '“齐鲁号”零散集结班列首发', desc: '这是描述信息'},
         { src: require('../../assets/video-img.png'), title: '“齐鲁号”零散集结班列首发', desc: '2018年12月22日，“齐鲁号”欧亚班列烟台首发仪式在烟台港集装箱码头隆重举行，烟台市委、市政府、烟台海关等单位相关负责同志出席了首发仪式。'},
         { src: require('../../assets/video-img.png'), title: '“齐鲁号”零散集结班列首发', desc: '2018年12月22日，“齐鲁号”欧亚班列烟台首发仪式在烟台港集装箱码头隆重举行，烟台市委、市政府、烟台海关等单位相关负责同志出席了首发仪式。'}
       ],
-      pushNews: {}
+      pushNews: null
     }
   },
   methods: {
@@ -150,14 +154,9 @@ export default {
     },
     getPushNews () {
       api.getStickNews({pageSize: 1, pageNo: 1, type: 1, isPush: true}).then(res => {
+        console.log(res)
         let {list} = res
         this.pushNews = list[0]
-      })
-    },
-    getNewsArrs () {
-      api.getStickNews({pageSize: 4, pageNo: 1, type: 1, isPush: false}).then(res => {
-        let {list} = res
-        this.newsArrs = list
       })
     }
   },
@@ -165,8 +164,8 @@ export default {
     this.handleAnimate();
     addEventListener('scroll', this.handleAnimate, false)
     // 获取推送新闻
-    this.getPushNews()
-    this.getNewsArrs()
+    this.getPushNews();
+
   },
   beforeDestroy () {
     removeEventListener('scroll', this.handleAnimate, false)
