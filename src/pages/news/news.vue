@@ -120,7 +120,7 @@ import mFooter from '_c/footer'
 import handleScroll from '../../mixins/index'
 import mBanner from '_c/banner'
 import pager from 'vue-simple-pager'
-
+import api from '@/fetch/api'
 export default {
   name: 'news',
   mixins: [ handleScroll ],
@@ -129,16 +129,25 @@ export default {
     return {
       curIndex: 2,
       totalPage: 10,
-      page: 1
+      page: 1,
+      newsArrs: []
     }
   },
   methods: {
+    getAllNews () {
+      api.getStickNews({pageSize: 1, pageNo: 1, type: 1}).then(res => {
+        console.log(res)
+      })
+    },
     goPage (data) {
       this.page = data.page
     },
     goToDetail () {
       window.location.href = `news-detail.html?id=1`
     }
+  },
+  mounted () {
+    this.getAllNews()
   }
 }
 </script>
