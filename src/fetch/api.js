@@ -61,5 +61,14 @@ export default {
   getStickNews ({pageNo, pageSize, type, isPush}) {
     let urls = `${URLS.GETPUSHNEWS}?pageNo=${pageNo}&pageSize=${pageSize}&type=${type}&isPush=${isPush}`
     return fetch(urls)
+  },
+  getAllNews ({pageNo, pageSize}) {
+    let urls = `${URLS.GETALLNEWS}?pageNo=${pageNo}&pageSize=${pageSize}`
+    return fetch(urls)
+  },
+  getNewsDetail (id) {
+    // debugger
+    let urls = `${URLS.GETNEWSDETAILS}?id=${+id}`
+    return fetch(urls)
   }
 }

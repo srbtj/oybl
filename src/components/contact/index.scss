@@ -1,4 +1,7 @@
 @import '../../style/common/custom.scss';
+.mobile-show{
+  display: none;
+}
 .contact-list{
   display: flex;
   flex-direction: row;

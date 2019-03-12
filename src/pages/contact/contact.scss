@@ -67,6 +67,7 @@
       height: 17px;
       z-index: 10;
       background: url(../../assets/sdgs-txt.png) center no-repeat;
+      background-size: cover;
     }
   }
 }
@@ -131,3 +132,5 @@
     opacity: .5;
   }
 }
+
+@import './contact-media.scss';

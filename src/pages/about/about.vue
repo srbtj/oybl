@@ -31,7 +31,7 @@
               <div class="item-title">里程碑  砥砺前行</div>
               <div class="item-desc">从项目调研、与各地市货源组织单位对接， 到省级平台统筹运营准备、技术创新</div>
             </div>
-            <div class="flex-item">
+            <div class="flex-item event-items">
               <div class="item-txt" v-for="(item, i) in eventItems" :key="'event_' + i">{{item}}</div>
             </div>
           </div>

@@ -10,7 +10,8 @@
       <div class="item-desc">
         <span class="desc-info" :class="{'desc-wx': desc.wx}" v-for="(desc, c) in item.desc" :key="'desc_' + c">
           {{desc.txt}}
-          <span v-if="desc.phone" class="phone">18561361267</span>
+          <span v-if="desc.phone" class="phone mobile-hide">18561361267</span>
+          <a v-if="desc.phone" href="tel: 18561361267" class="mobile-phone mobile-show">18561361267</a>
           <img v-if="desc.wx" class="wx-code" src="../../assets/index-wx-code.png"/>
         </span>
       </div>

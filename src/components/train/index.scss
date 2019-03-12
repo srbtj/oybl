@@ -29,6 +29,7 @@
         font-weight: bold;
         line-height: 1;
         margin-bottom: 10px;
+        color: #fff;
       }
       .item-info{
         display: flex;
@@ -52,17 +53,18 @@
       .desc-info{
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         height: 70px;
         margin-left: 20px;
         .info-txt{
+          color: #fff;
           display: block;
           font-size: $font-size-12;
         }
-      }
-      .txt-color{
-        color: $active-color;
-        font-size: $font-size-16 !important;
+        .txt-color{
+          color: $active-color;
+          font-size: $font-size-16;
+        }
       }
     }
   }
@@ -83,6 +85,21 @@
     .title-txt,
     .load-more{
       color: $font-color-333 !important;
+    }
+  }
+  .flex-list{
+    .flex-item{
+      .item-title{
+        color: #333;
+      }
+      .desc-info{
+        .info-txt{
+          color: #333;
+        }
+        .txt-color{
+          color: $active-color;
+        }
+      }
     }
   }
 }

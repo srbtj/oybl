@@ -5,5 +5,6 @@ import store from '@/store'
 
 new Vue({
   store,
+  // mixins: [myFilter],
   render: h => h(App)
 }).$mount('#app')

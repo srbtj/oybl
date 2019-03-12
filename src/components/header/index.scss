@@ -16,10 +16,17 @@
       font-size: 80px;
       color: $active-color;
     }
-    .sdgswl-img{
-      position: relative;
-      margin-left: 120px;
-      top: 20px;
+  }
+  .logo-sdwl{
+    position: relative;
+    left: 120px;
+    top: 18px;
+    &::before{
+      position: absolute;
+      left: -20px;
+      content: '';
+      border-left: 1px solid $border-color-ccc;
+      height: 45px;
     }
   }
   .logo-spit{
@@ -123,6 +130,9 @@
         display: block;
       }
     }
+  }
+  .header-mobile-show{
+    display: none;
   }
 }
 .fixed{

@@ -1,6 +1,10 @@
 @import '../../style/common/breadcrumb.scss';
 @import '../../style/mixins/index.scss';
 @import '../../style/common/news-common.scss';
+
+.mobile-show{
+  display: none;
+}
 #main > .main-wrap{
   .news-info-wrap{
     .news-item{
@@ -93,3 +97,5 @@
     }
   }
 }
+
+@import './news-media.scss';

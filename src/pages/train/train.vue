@@ -2,9 +2,9 @@
   <div id="container">
     <m-header :curIndex="curIndex"/>
     <div id="main">
-      <m-banner :bgName="'train-bg'" :txtName="'train-txt'"/>
+      <m-banner :bgName="'train-bg'" :txtName="'train-txt'" class="mobile-hide"/>
       <m-train :class="'train-train'">
-        <m-summary :title="'班列概况'" slot="title" :class="'train-summary'"/>
+        <m-summary class="mobile-hide" :title="'班列概况'" slot="title" :class="'train-summary'"/>
       </m-train>
       <div class="train-city">
         <div class="main-wrap">

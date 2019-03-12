@@ -31,9 +31,31 @@ export default {
           v.style.opacity = 0;
         }
       })
+    },
+    setFontSize() { // 设置html字体大小
+      let oHtml = document.querySelector('html')
+      let rect = oHtml.getBoundingClientRect()
+      let width = rect.width
+      oHtml.style.fontSize = width / 15 + 'px'
+    },
+    changeScreen() { // 改变窗口大小时,修改html字体大小
+      let docEl = document.documentElement
+      let resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+      let recalc = function() {
+        let clientWidth = docEl.clientWidth
+        if (clientWidth > 750) return
+        if (clientWidth === undefined) return
+        docEl.style.fontSize = 50 * (clientWidth / 750) + 'px'
+      }
+
+      if (document.addEventListener === undefined) return
+      window.addEventListener(resizeEvt, recalc, false)
+      document.addEventListener(resizeEvt, recalc, false)
     }
   },
   mounted () {
+    this.setFontSize()
+    this.changeScreen()
     addEventListener('scroll', this.handleScroll, false)
   },
   beforeDestroy () {

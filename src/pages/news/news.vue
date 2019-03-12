@@ -2,8 +2,8 @@
   <div id="container">
     <m-header :curIndex="curIndex"/>
     <div id="main">
-      <m-banner :bgName="'news-bg'" :txtName="'news-txt'"/>
-      <div class="breadcrumb">
+      <m-banner class="mobile-hide" :bgName="'news-bg'" :txtName="'news-txt'"/>
+      <div class="breadcrumb mobile-hide">
         <div class="main-wrap">
           <span class="crumb-text crumb-arrow">新闻动态</span>
         </div>
@@ -11,89 +11,24 @@
       <div class="main-wrap">
         <div class="news-info-wrap">
           <ul class="news-list">
-            <li class="news-item" @click="goToDetail()">
-              <div class="news-push">
-                <img src="../../assets/news-img.png" class="news-img"/>
+            <li class="news-item" :class="{'news-mobile': !news.isPush}" @click="goToDetail(news.id)"
+              v-for="(news, index) in newsArrs" :key="'news_' + index">
+              <div class="news-push" v-if="news.isPush">
+                <img :src="news.url" class="news-img"/>
                 <div class="news-info">
-                  <div class="news-date">2019/01/15</div>
-                  <div class="news-title">俄铁物流集装箱运输部总经理Alan Kaluhov一行到访物流集团</div>
-                  <div class="news-desc">1月15日下午，俄铁物流集装箱运输部总经理、远东路桥俄罗斯区总经理Alan Kaluhov先生，远东路桥俄罗斯销售和项目经理Evgenia Bagraeva女士一行到访物流集团，商谈“齐鲁号”欧亚班列北线通道的境外合作事宜，物流集团党委书记、董事长张仰进，副总经理刘颖及班列项目组有关人员参加了会谈…</div>
+                  <div class="news-date mobile-hide">{{ news.date | dataFormat('yyyy/MM/dd') }}</div>
+                  <div class="news-title">{{news.title}}</div>
+                  <div class="news-desc mobile-hide">{{news.newsAbstract}}</div>
                 </div>
               </div>
-              <!-- <div class="news-default">
-                <div class="news-title">自主品牌汽车首次搭乘“齐鲁号”欧亚班列走出国门</div>
-                <div class="news-info">
-                  <span class="publish">发布者: 物流集团</span>
-                  <span class="count">浏览次数: 2080</span>
-                  <span class="date">2019/01/01</span>
+              <div class="news-default" v-else>
+                <div class="news-title">{{news.title}}</div>
+                <div class="news-info mobile-hide">
+                  <span class="publish">发布者: {{news.publisher}}</span>
+                  <span class="count">浏览次数: {{news.count || 0}}</span>
+                  <span class="date">{{ news.date | dataFormat('yyyy/MM/dd') }}</span>
                 </div>
-                <div class="news-desc">1月1日，一辆辆满载着自主品牌SUV的大型货车驶入山东高速国储物流有限公司济南（国储）铁路国际场站，标志着我国自主品牌汽车出口俄罗斯物流项目最终花落“齐鲁号”…</div>
-              </div> -->
-            </li>
-            <li class="news-item">
-              <div class="news-default">
-                <div class="news-title">自主品牌汽车首次搭乘“齐鲁号”欧亚班列走出国门</div>
-                <div class="news-info">
-                  <span class="publish">发布者: 物流集团</span>
-                  <span class="count">浏览次数: 2080</span>
-                  <span class="date">2019/01/01</span>
-                </div>
-                <div class="news-desc">1月1日，一辆辆满载着自主品牌SUV的大型货车驶入山东高速国储物流有限公司济南（国储）铁路国际场站，标志着我国自主品牌汽车出口俄罗斯物流项目最终花落“齐鲁号”…</div>
-              </div>
-            </li>
-            <li class="news-item">
-              <div class="news-default">
-                <div class="news-title">自主品牌汽车首次搭乘“齐鲁号”欧亚班列走出国门</div>
-                <div class="news-info">
-                  <span class="publish">发布者: 物流集团</span>
-                  <span class="count">浏览次数: 2080</span>
-                  <span class="date">2019/01/01</span>
-                </div>
-                <div class="news-desc">1月1日，一辆辆满载着自主品牌SUV的大型货车驶入山东高速国储物流有限公司济南（国储）铁路国际场站，标志着我国自主品牌汽车出口俄罗斯物流项目最终花落“齐鲁号”…</div>
-              </div>
-            </li>
-            <li class="news-item">
-              <div class="news-default">
-                <div class="news-title">自主品牌汽车首次搭乘“齐鲁号”欧亚班列走出国门</div>
-                <div class="news-info">
-                  <span class="publish">发布者: 物流集团</span>
-                  <span class="count">浏览次数: 2080</span>
-                  <span class="date">2019/01/01</span>
-                </div>
-                <div class="news-desc">1月1日，一辆辆满载着自主品牌SUV的大型货车驶入山东高速国储物流有限公司济南（国储）铁路国际场站，标志着我国自主品牌汽车出口俄罗斯物流项目最终花落“齐鲁号”…</div>
-              </div>
-            </li>
-            <li class="news-item">
-              <div class="news-default">
-                <div class="news-title">自主品牌汽车首次搭乘“齐鲁号”欧亚班列走出国门</div>
-                <div class="news-info">
-                  <span class="publish">发布者: 物流集团</span>
-                  <span class="count">浏览次数: 2080</span>
-                  <span class="date">2019/01/01</span>
-                </div>
-                <div class="news-desc">1月1日，一辆辆满载着自主品牌SUV的大型货车驶入山东高速国储物流有限公司济南（国储）铁路国际场站，标志着我国自主品牌汽车出口俄罗斯物流项目最终花落“齐鲁号”…</div>
-              </div>
-            </li>
-            <li class="news-item">
-              <div class="news-default">
-                <div class="news-title">自主品牌汽车首次搭乘“齐鲁号”欧亚班列走出国门</div>
-                <div class="news-info">
-                  <span class="publish">发布者: 物流集团</span>
-                  <span class="count">浏览次数: 2080</span>
-                  <span class="date">2019/01/01</span>
-                </div>
-                <div class="news-desc">1月1日，一辆辆满载着自主品牌SUV的大型货车驶入山东高速国储物流有限公司济南（国储）铁路国际场站，标志着我国自主品牌汽车出口俄罗斯物流项目最终花落“齐鲁号”…</div>
-              </div>
-            </li>
-            <li class="news-item">
-              <div class="news-default">
-                <div class="news-title">自主品牌汽车首次搭乘“齐鲁号”欧亚班列走出国门</div>
-                <div class="news-info">
-                  <span class="publish">发布者: 物流集团</span>
-                  <span class="count">浏览次数: 2080</span>
-                  <span class="date">2019/01/01</span>
-                </div>
-                <div class="news-desc">1月1日，一辆辆满载着自主品牌SUV的大型货车驶入山东高速国储物流有限公司济南（国储）铁路国际场站，标志着我国自主品牌汽车出口俄罗斯物流项目最终花落“齐鲁号”…</div>
+                <div class="news-desc mobile-hide">{{news.newsAbstract}}</div>
               </div>
             </li>
           </ul>
@@ -101,11 +36,12 @@
             <pager
               :total-page="totalPage"
               :init-page="page"
+              :show-items="showItems"
               @go-page="goPage"></pager>
           </div>
         </div>
         <!-- 广告 -->
-        <div class="news-ad"><img src="../../assets/wx-gzh.png"/></div>
+        <div class="news-ad mobile-hide"><img src="../../assets/wx-gzh.png"/></div>
       </div>
     </div>
     <m-footer />
@@ -121,33 +57,43 @@ import handleScroll from '../../mixins/index'
 import mBanner from '_c/banner'
 import pager from 'vue-simple-pager'
 import api from '@/fetch/api'
+import myFilter from '@/mixins/filter'
 export default {
   name: 'news',
-  mixins: [ handleScroll ],
+  mixins: [ handleScroll, myFilter ],
   components: {mHeader, mFooter, mBanner, pager},
   data () {
     return {
       curIndex: 2,
-      totalPage: 10,
+      totalPage: 1,
+      pageSize: 10,
       page: 1,
-      newsArrs: []
+      newsArrs: [],
+      showItems: 5
     }
   },
   methods: {
     getAllNews () {
-      api.getStickNews({pageSize: 1, pageNo: 1, type: 1}).then(res => {
-        console.log(res)
+      api.getAllNews({pageSize: this.pageSize, pageNo: this.page, type: 1}).then(res => {
+        let {list, pages, pageNum} = res
+        this.page = pageNum
+        this.totalPage = pages
+        this.newsArrs = list
       })
     },
     goPage (data) {
       this.page = data.page
+      console.log(this.page)
+      this.getAllNews()
     },
-    goToDetail () {
-      window.location.href = `news-detail.html?id=1`
+    goToDetail (id) {
+      window.location.href = `news-detail.html?id=${id}`
     }
   },
   mounted () {
     this.getAllNews()
+    const clientWidth = document.documentElement.clientWidth
+    this.showItems = clientWidth > 750 ? 5 : 3;
   }
 }
 </script>

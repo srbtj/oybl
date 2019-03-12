@@ -1,7 +1,12 @@
 @import '../../style/common/breadcrumb.scss';
 @import '../../style/mixins/index.scss';
 @import '../../style/common/news-common.scss';
-
+.mobile-hide{
+  display: block;
+}
+.mobile-show{
+  display: none;
+}
 .news-info-wrap{
   // padding-right: 30px;
   .news-title{
@@ -44,3 +49,5 @@
     padding-right: 30px;
   }
 }
+
+@import './news-detail-media.scss';

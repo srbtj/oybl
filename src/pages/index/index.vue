@@ -5,8 +5,12 @@
       <!-- banner -->
       <div class="banner-wrap">
         <div class="main-wrap">
-          <div class="banner-title animated fadeInDown"><img src="../../assets/banner-title.png" class="banner-title-img"/></div>
-          <div class="banner-desc animated fadeInUp"><img src="../../assets/banner-desc.png" class="banner-desc"/></div>
+          <div class="banner-title animated fadeInDown">
+            <p class="banner-title-txt"></p>
+          </div>
+          <div class="banner-desc animated fadeInUp">
+            <p class="banner-desc-txt"></p>
+          </div>
         </div>
         <div class="banner-btn">
           <div class="main-wrap">
@@ -14,24 +18,27 @@
               <span class="banner-icon">
                 <i class="icon iconfont icon-qiluhaopingtai"></i>
               </span>
-              <div class="banner-desc-txt">
+              <div class="banner-desc-txt mobile-hide">
                 <span class="txt-title">“齐鲁号”欧亚班列  信息化管理平台</span>
                 <span class="txt-desc">省级运营信息平台系统</span>
               </div>
+              <div class="banner-mobile-desc-txt mobile-show">
+                <span class="txt-title">“齐鲁号”欧亚班列 <br/>信息化管理平台</span>
+              </div>
             </div>
-            <div class="btn-info animated fadeInRight" @click="gotoPT">进入信息平台 <i class="icon iconfont icon-gengduo"></i></div>
+            <p class="btn-info animated fadeInRight" @click="gotoPT">进入信息平台 <i class="icon iconfont icon-gengduo"></i></p>
           </div>
         </div>
       </div>
       <!-- news -->
       <div class="news-wrap">
         <div class="main-wrap">
-          <m-summary :title="'新闻动态'">
+          <m-summary :title="'新闻动态'" class="mobile-hide">
             <a href="news.html" class="load-more" slot="more">
               更多<i class="icon iconfont icon-gengduo"></i>
             </a>
           </m-summary>
-          <div class="news-info">
+          <div class="news-info mobile-hide">
             <div class="flex-item" @click="goToNewsDetail(pushNews.id)">
               <div class="news-img"><img :src="pushNews.url"/></div>
               <div class="news-desc">
@@ -45,15 +52,26 @@
             <ul class="news-list">
               <li class="news-item" v-for="(news, i) in newsArrs" :key="'news_' + i" @click="linkToNewsDetail(news.id)">
                 <div class="news-title">{{news.title}}</div>
-                <span class="news-date">{{news.date | dataFormat('yyyy/MM/dd')}}<i class="icon iconfont icon-gengduo"></i></span>
+                <span class="news-date">{{news.date | dataFormat('yyyy/mm/dd')}}<i class="icon iconfont icon-gengduo"></i></span>
               </li>
             </ul>
+          </div>
+          <div class="mobile-show">
+            <div class="news-mobile" @click="goToNewsDetail(pushNews.id)">
+              <div class="flex-item">
+                <h2 class="news-title">{{pushNews.title}}</h2>
+                <p class="news-desc">{{pushNews.newsAbstract}}</p>
+              </div>
+              <div class="flex-item">
+                <img class="item-img" :src="pushNews.url"/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <!-- video -->
       <div class="video-wrap">
-        <div class="main-wrap">
+        <div class="main-wrap mobile-hide">
           <swiper :options="swiperOptions" ref="mySwiper">
             <swiper-slide v-for="(video, i) in videoArrs" :key="'video_' + i">
               <div class="slide-info">
@@ -70,18 +88,33 @@
           </swiper>
           <div class="swiper-pagination"></div>
         </div>
+        <div class="main-wrap mobile-show">
+          <swiper :options="swiperOptions750" ref="mySwiper">
+            <swiper-slide v-for="(video, i) in videoArrs" :key="'video_' + i">
+              <div class="slide-info">
+                <div class="video-img">
+                  <img :src="video.src" alt="" class="slide-img">
+                  <i class="icon iconfont icon-bofang"></i>
+                </div>
+                <div class="slide-desc">
+                  <p class="item-name">{{video.title}}</p>
+                </div>
+              </div>
+            </swiper-slide>
+          </swiper>
+        </div>
       </div>
       <!-- train -->
       <mTrain :class="'index-train'">
         <!-- <div slot="title"> -->
-          <m-summary :title="'班列概况'" slot="title" :class="'train-summary'">
-            <a href="contact.html" class="load-more" slot="more">
+          <m-summary :title="'班列概况'" slot="title" :class="'train-summary mobile-hide'">
+            <a href="train.html" class="load-more" slot="more">
               更多详情<i class="icon iconfont icon-gengduo"></i>
             </a>
           </m-summary>
       </mTrain>
       <!-- contact -->
-      <div class="main-wrap">
+      <div class="main-wrap mobile-hide">
         <div class="contact-wrap animate">
           <m-summary :title="'联系我们'">
             <a href="contact.html" class="load-more" slot="more">
@@ -120,6 +153,18 @@ const swiperOptions = {
     bulletActiveClass: 'my-bullet-active'
   }
 }
+const swiperOptions750 = {
+  autoplay: true,
+  loop: true,
+  slidesPerView: 1,
+  spaceBetween: 20,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    bulletClass: 'my-bullet',
+    bulletActiveClass: 'my-bullet-active'
+  }
+}
 export default {
   name: 'index',
   mixins: [ handleScroll ],
@@ -127,6 +172,7 @@ export default {
   data () {
     return {
       swiperOptions,
+      swiperOptions750,
       news: { src: require('../../assets/news-img.png'), title: '“齐鲁号”零散集结班列首发齐鲁号零散集结班列首发', desc: '2018年12月22日，“齐鲁号”欧亚班列烟台首发仪式在烟台港集装箱码头隆重举行，烟台市委、市政府、烟台海关、山东高速物流集团、烟台车务段、烟台港集团等单位相关烟台市委、市政府、烟台海关、山东高速物流集团、烟台车务段、烟台港集团等单位相关…'},
       newsArrs: [],
       videoArrs: [
@@ -159,6 +205,34 @@ export default {
         let {list} = res
         this.newsArrs = list
       })
+    },
+    watchScreenChange () {
+      let docEl = document.documentElement
+      let resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+
+      this.swiperOptions = swiperOptions;
+      let recalc = function() {
+        let clientWidth = docEl.clientWidth
+        let swiperOptions = null;
+        if (clientWidth <= 750) {
+          swiperOptions = {
+            autoplay: true,
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              bulletClass: 'my-bullet',
+              bulletActiveClass: 'my-bullet-active'
+            }
+          }
+          this.swiperOptions = swiperOptions;
+        }
+      }
+      if (document.addEventListener === undefined) return
+      window.addEventListener(resizeEvt, recalc, false)
+      document.addEventListener(resizeEvt, recalc, false)
     }
   },
   mounted () {
@@ -167,6 +241,7 @@ export default {
     // 获取推送新闻
     this.getPushNews()
     this.getNewsArrs()
+    // this.watchScreenChange()
   },
   beforeDestroy () {
     removeEventListener('scroll', this.handleAnimate, false)

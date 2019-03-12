@@ -1,4 +1,7 @@
 @import '../../style/common/custom.scss';
+.mobile-show{
+  display: none;
+}
 .train-city{
   position: relative;
   width: 100%;
@@ -160,3 +163,5 @@
     }
   }
 }
+
+@import './train-media.scss';
