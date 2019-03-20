@@ -8,6 +8,7 @@
   border-bottom: 1px solid $breadcrumb-border-color;
   font-size: 0;
   position: relative;
+
   .crumb-text,
   .crumb-link{
     display: inline-block;
@@ -53,3 +54,5 @@
     }
   }
 }
+
+@import './breadcrumb-media.scss';

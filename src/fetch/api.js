@@ -70,5 +70,9 @@ export default {
     // debugger
     let urls = `${URLS.GETNEWSDETAILS}?id=${+id}`
     return fetch(urls)
+  },
+  getAllVideo ({pageNo, pageSize}) {
+    let urls = `${URLS.GETALLVIDEOS}?pageNo=${pageNo}&pageSize=${pageSize}`
+    return fetch(urls)
   }
 }

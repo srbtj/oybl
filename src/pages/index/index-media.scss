@@ -82,12 +82,12 @@
       }
     }
     .news-wrap{
-      height: px2rem(310);
+      height: px2rem(350);
       .news-mobile{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        height: px2rem(310);
+        height: px2rem(350);
         .flex-item:first-child{
           width: px2rem(450);
           .news-title{
@@ -106,6 +106,8 @@
             font-size: px2rem(22);
             color: #666;
             line-height: px2rem(36);
+            overflow-y: auto;
+            height: px2rem(200);
           }
         }
         .item-img{
@@ -116,6 +118,30 @@
       }
     }
 
+    .train-desc-title{
+      position: absolute;
+      top: 0;
+      left: px2rem(30);
+      z-index: 100;
+      .title{
+        padding: 0;
+        margin-top: px2rem(20);
+        line-height: 1;
+        .title-txt{
+          position: relative;
+          font-size: px2rem(32);
+          color: #fff;
+          &::before{
+            position: absolute;
+            left: 0;
+            bottom: px2rem(-20);
+            right: 0;
+            content: '';
+            border-bottom: px2rem(4) solid $active-color;
+          }
+        }
+      }
+    }
     .video-wrap{
       height: px2rem(520);
       .slide-info{
@@ -123,8 +149,9 @@
         width: px2rem(655);
         margin-top: px2rem(30);
         margin-left: px2rem(20);
+        // border-bottom: 2px solid green;
         .slide-img{
-          height: px2rem(370);
+          height: px2rem(334);
         }
         .slide-desc .item-name{
           padding: 0 px2rem(15);
@@ -133,5 +160,36 @@
       }
     }
 
+  }
+  #video-play-wrap{
+    background: rgba(0, 0, 0, .8);
+    .video-model{
+      position: absolute;
+      top: 50%;
+      left: px2rem(30);
+      // width: px2rem(600);
+      width: px2rem(500);
+      height: px2rem(300);
+      margin-top: px2rem(-250);
+      margin-left: px2rem(110);
+      // background: #fff;
+      .video-play{
+        width: px2rem(500);
+        height: px2rem(300);
+        // height: 100%;
+      }
+      .close-video{
+        position: absolute;
+        right: px2rem(-50);
+        top: px2rem(10);
+        font-size: px2rem(40);
+        background: #ee3232;
+        width: px2rem(50);
+        height: px2rem(50);
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
   }
 }

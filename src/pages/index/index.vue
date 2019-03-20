@@ -71,17 +71,17 @@
       </div>
       <!-- video -->
       <div class="video-wrap">
-        <div class="main-wrap mobile-hide">
-          <swiper :options="swiperOptions" ref="mySwiper">
+        <div class="main-wrap mobile-hide" @mouseenter="on_top_enter" @mouseleave="on_top_leave">
+          <swiper :options="swiperOptions" ref="mySwiper" v-if="videoArrs.length > 0">
             <swiper-slide v-for="(video, i) in videoArrs" :key="'video_' + i">
               <div class="slide-info">
                 <div class="video-img">
-                  <img :src="video.src" alt="" class="slide-img">
+                  <img :src="video.imgUrl" alt="" class="slide-img">
                   <i class="icon iconfont icon-bofang"></i>
                 </div>
                 <div class="slide-desc">
                   <div class="item-name">{{video.title}}</div>
-                  <div class="item-desc">{{video.desc}}</div>
+                  <div class="item-desc">{{video.description}}</div>
                 </div>
               </div>
             </swiper-slide>
@@ -89,11 +89,11 @@
           <div class="swiper-pagination"></div>
         </div>
         <div class="main-wrap mobile-show">
-          <swiper :options="swiperOptions750" ref="mySwiper">
+          <swiper :options="swiperOptions750" ref="mySwiper" v-if="videoArrs.length > 0">
             <swiper-slide v-for="(video, i) in videoArrs" :key="'video_' + i">
-              <div class="slide-info">
+              <div class="slide-info" @click="playVideo(video)">
                 <div class="video-img">
-                  <img :src="video.src" alt="" class="slide-img">
+                  <img :src="video.imgUrl" alt="" class="slide-img">
                   <i class="icon iconfont icon-bofang"></i>
                 </div>
                 <div class="slide-desc">
@@ -105,14 +105,21 @@
         </div>
       </div>
       <!-- train -->
-      <mTrain :class="'index-train'">
-        <!-- <div slot="title"> -->
-          <m-summary :title="'班列概况'" slot="title" :class="'train-summary mobile-hide'">
-            <a href="train.html" class="load-more" slot="more">
-              更多详情<i class="icon iconfont icon-gengduo"></i>
-            </a>
-          </m-summary>
-      </mTrain>
+      <div style="position: relative;">
+        <div class="train-desc-title mobile-show">
+            <p class="title">
+              <span class="title-txt">班列概况</span>
+            </p>
+          </div>
+          <mTrain :class="'index-train'">
+          <!-- <div slot="title"> -->
+            <m-summary :title="'班列概况'" slot="title" :class="'train-summary mobile-hide'">
+              <a href="train.html" class="load-more" slot="more">
+                更多详情<i class="icon iconfont icon-gengduo"></i>
+              </a>
+            </m-summary>
+        </mTrain>
+      </div>
       <!-- contact -->
       <div class="main-wrap mobile-hide">
         <div class="contact-wrap animate">
@@ -126,6 +133,16 @@
       </div>
     </div>
     <m-footer />
+    <div id="video-play-wrap" v-if="showOrHideVideo">
+      <div class="video-model">
+            <video id="myVideo" ref="myVideo" class="video-play" :src="videoUrl" controls="controls">
+              your browser does not support the video tag
+            </video>
+            <div class="close-video" @click="closeVideo">
+                <i class="icon iconfont icon-close"></i>
+            </div>
+        </div>
+    </div>
   </div>
 </template>
 <script>
@@ -140,48 +157,83 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import handleScroll from '../../mixins/index'
 import api from '@/fetch/api'
 
+let vm = null;
 // console.log(api)
 const swiperOptions = {
-  autoplay: true,
+  autoplay: {
+    delay: 2000,
+    disableOnInteraction: true
+  },
   loop: true,
+  notNextTick: true,
   slidesPerView: 3,
   spaceBetween: 20,
+  observe: true,
+  observeParents: true,
+  paginationClickable: true,
+  observer: true,
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
     bulletClass: 'my-bullet',
     bulletActiveClass: 'my-bullet-active'
+  },
+  on: {
+    click: function () {
+      const realIndex = this.realIndex;
+      vm.handleClickSlide(realIndex);
+    }
   }
 }
 const swiperOptions750 = {
-  autoplay: true,
+  // autoplay: true,
+  // loop: true,
+  // slidesPerView: 1,
+  // spaceBetween: 20,
+  autoplay: {
+    delay: 2000,
+    disableOnInteraction: true
+  },
   loop: true,
+  notNextTick: true,
   slidesPerView: 1,
   spaceBetween: 20,
+  observe: true,
+  observeParents: true,
+  paginationClickable: true,
+  observer: true,
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
     bulletClass: 'my-bullet',
     bulletActiveClass: 'my-bullet-active'
+  },
+  on: {
+    click: function () {
+      const realIndex = this.realIndex;
+      vm.handleClickSlide(realIndex);
+    }
   }
 }
 export default {
   name: 'index',
   mixins: [ handleScroll ],
   components: {mHeader, mFooter, mSummary, mContact, mTrain, swiper, swiperSlide},
+  computed: {
+    mySwiper () {
+      return this.$refs.mySwiper.swiper;
+    }
+  },
   data () {
     return {
       swiperOptions,
       swiperOptions750,
       news: { src: require('../../assets/news-img.png'), title: '“齐鲁号”零散集结班列首发齐鲁号零散集结班列首发', desc: '2018年12月22日，“齐鲁号”欧亚班列烟台首发仪式在烟台港集装箱码头隆重举行，烟台市委、市政府、烟台海关、山东高速物流集团、烟台车务段、烟台港集团等单位相关烟台市委、市政府、烟台海关、山东高速物流集团、烟台车务段、烟台港集团等单位相关…'},
       newsArrs: [],
-      videoArrs: [
-        { src: require('../../assets/video-img.png'), title: '“齐鲁号”零散集结班列首发', desc: '2018年12月22日，“齐鲁号”欧亚班列烟台首发仪式在烟台港集装箱码头隆重举行，烟台市委、市政府、烟台海关等单位相关负责同志出席了首发仪式。'},
-        { src: require('../../assets/video-img.png'), title: '“齐鲁号”零散集结班列首发', desc: '这是描述信息'},
-        { src: require('../../assets/video-img.png'), title: '“齐鲁号”零散集结班列首发', desc: '2018年12月22日，“齐鲁号”欧亚班列烟台首发仪式在烟台港集装箱码头隆重举行，烟台市委、市政府、烟台海关等单位相关负责同志出席了首发仪式。'},
-        { src: require('../../assets/video-img.png'), title: '“齐鲁号”零散集结班列首发', desc: '2018年12月22日，“齐鲁号”欧亚班列烟台首发仪式在烟台港集装箱码头隆重举行，烟台市委、市政府、烟台海关等单位相关负责同志出席了首发仪式。'}
-      ],
-      pushNews: {}
+      videoArrs: [],
+      pushNews: {},
+      showOrHideVideo: false,
+      videoUrl: ''
     }
   },
   methods: {
@@ -205,6 +257,20 @@ export default {
         let {list} = res
         this.newsArrs = list
       })
+    },
+    getAllVideo () {
+      api.getAllVideo({pageSize: 100, pageNo: 1}).then(res => {
+        let {list} = res;
+        this.$nextTick(function () {
+          this.videoArrs = list
+        });
+      })
+    },
+    on_top_enter() {
+      this.mySwiper.autoplay.stop();
+    },
+    on_top_leave() {
+      this.mySwiper.autoplay.start();
     },
     watchScreenChange () {
       let docEl = document.documentElement
@@ -233,7 +299,21 @@ export default {
       if (document.addEventListener === undefined) return
       window.addEventListener(resizeEvt, recalc, false)
       document.addEventListener(resizeEvt, recalc, false)
+    },
+    closeVideo () {
+      this.$refs.myVideo.pause();
+      this.showOrHideVideo = !this.showOrHideVideo;
+    },
+    playVideo (index) {
+      this.videoUrl = this.videoArrs[index].videoUrl || 'http://www.sdgswl.com/highway/video/sdgsxh.mp4';
+      this.showOrHideVideo = !this.showOrHideVideo;
+    },
+    handleClickSlide (index) {
+      this.playVideo(index)
     }
+  },
+  created () {
+    vm = this;
   },
   mounted () {
     this.handleAnimate();
@@ -241,6 +321,8 @@ export default {
     // 获取推送新闻
     this.getPushNews()
     this.getNewsArrs()
+    // 获取视频
+    this.getAllVideo()
     // this.watchScreenChange()
   },
   beforeDestroy () {

@@ -9,6 +9,7 @@
 }
 .news-info-wrap{
   // padding-right: 30px;
+  padding-left: 20px;
   .news-title{
     display: flex;
     height: 90px;
@@ -16,6 +17,8 @@
     flex-wrap: wrap;
     color: #4c4c4c;
     font-size: $font-size-20;
+    margin: 0;
+    padding-right: 20px;
   }
   .news-info{
     margin-bottom: 15px;

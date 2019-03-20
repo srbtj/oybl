@@ -75,10 +75,23 @@ export default {
   methods: {
     getAllNews () {
       api.getAllNews({pageSize: this.pageSize, pageNo: this.page, type: 1}).then(res => {
+        let isPush = false;
         let {list, pages, pageNum} = res
         this.page = pageNum
         this.totalPage = pages
-        this.newsArrs = list
+        if (this.page === 1) {
+          list.forEach(item => {
+            if (!isPush && item.isPush) {
+              isPush = true;
+            } else {
+              Object.assign(item, {isPush: false})
+            }
+          })
+
+          this.newsArrs = list
+        } else {
+          this.newsArrs = list
+        }
       })
     },
     goPage (data) {

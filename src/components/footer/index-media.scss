@@ -18,8 +18,18 @@
         line-height: 1.5;
       }
     }
-    .footer-copy{
-
+    .footer-mobile-copy{
+      margin-top: px2rem(40);
+      .copy-1,
+      .copy-2{
+        font-size: px2rem(22);
+        color: $active-color;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        line-height: 1;
+        margin-bottom: px2rem(20);
+      }
     }
   }
 }

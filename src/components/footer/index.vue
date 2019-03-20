@@ -11,6 +11,10 @@
       <div class="footer-copy mobile-hide">
         <span class="copy-txt">Copyright @ 2018 SHANGDONG HIGH SPEED LOGISTICS GROUP CO.LTD, All Rights Reserved.</span>
       </div>
+      <div class="footer-mobile-copy mobile-show">
+        <p class="copy-1">鲁ICP备12011428号-1</p>
+        <p class="copy-2">Copyright© 山东高速物流集团有限公司 版权所有</p>
+      </div>
     </div>
   </div>
 </template>
