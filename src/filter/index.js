@@ -19,3 +19,7 @@ export function dataFormat (value, fmt) {
   }
   return fmt;
 }
+
+export function substringStr (val, len = 100) {
+  return val.length > len ? (val.substring(0, len)) + '...' : val;
+}

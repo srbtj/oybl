@@ -46,7 +46,7 @@
                   <i class="icon iconfont icon-top1"></i>
                   <span class="title-h2">{{pushNews.title}}</span>
                 </div>
-                <span class="news-detail">{{pushNews.newsAbstract}}</span>
+                <span class="news-detail">{{pushNews.newsAbstract  | substringStr(120)}}</span>
               </div>
             </div>
             <ul class="news-list">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="slide-desc">
                   <div class="item-name">{{video.title}}</div>
-                  <div class="item-desc">{{video.description}}</div>
+                  <div class="item-desc" :title="video.description">{{video.description | substringStr(90)}}</div>
                 </div>
               </div>
             </swiper-slide>
