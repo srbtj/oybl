@@ -1,4 +1,4 @@
-let prefix = `http://39.108.5.62:9091`
+let prefix = `http://47.105.190.85`
 
 export const URLS = {
   GETPUSHNEWS: prefix + '/sdwlVideo/news/getNewsByType',

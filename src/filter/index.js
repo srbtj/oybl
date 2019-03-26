@@ -21,5 +21,6 @@ export function dataFormat (value, fmt) {
 }
 
 export function substringStr (val, len = 100) {
+  if (!val) return '';
   return val.length > len ? (val.substring(0, len)) + '...' : val;
 }

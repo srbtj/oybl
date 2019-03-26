@@ -249,7 +249,7 @@ export default {
     getPushNews () {
       api.getStickNews({pageSize: 1, pageNo: 1, type: 1, isPush: true}).then(res => {
         let {list} = res
-        this.pushNews = list[0]
+        this.pushNews = (list && list[0]) || {}
       })
     },
     getNewsArrs () {

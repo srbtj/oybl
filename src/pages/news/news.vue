@@ -96,7 +96,7 @@ export default {
     },
     goPage (data) {
       this.page = data.page
-      console.log(this.page)
+      // console.log(this.page)
       this.getAllNews()
     },
     goToDetail (id) {
