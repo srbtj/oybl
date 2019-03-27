@@ -160,10 +160,7 @@ import api from '@/fetch/api'
 let vm = null;
 // console.log(api)
 const swiperOptions = {
-  autoplay: {
-    delay: 2000,
-    disableOnInteraction: true
-  },
+  autoplay: true,
   loop: true,
   notNextTick: true,
   slidesPerView: 3,
@@ -180,20 +177,13 @@ const swiperOptions = {
   },
   on: {
     click: function () {
-      const realIndex = this.realIndex;
-      vm.handleClickSlide(realIndex);
+      const slideIndex = this.clickedSlide.dataset.swiperSlideIndex;
+      vm.handleClickSlide(slideIndex);
     }
   }
 }
 const swiperOptions750 = {
-  // autoplay: true,
-  // loop: true,
-  // slidesPerView: 1,
-  // spaceBetween: 20,
-  autoplay: {
-    delay: 2000,
-    disableOnInteraction: true
-  },
+  autoplay: true,
   loop: true,
   notNextTick: true,
   slidesPerView: 1,
@@ -210,8 +200,8 @@ const swiperOptions750 = {
   },
   on: {
     click: function () {
-      const realIndex = this.realIndex;
-      vm.handleClickSlide(realIndex);
+      const slideIndex = this.clickedSlide.dataset.swiperSlideIndex;
+      vm.handleClickSlide(slideIndex);
     }
   }
 }
@@ -309,6 +299,7 @@ export default {
       this.showOrHideVideo = !this.showOrHideVideo;
     },
     handleClickSlide (index) {
+      console.log(index);
       this.playVideo(index)
     }
   },
