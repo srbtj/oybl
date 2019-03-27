@@ -2,11 +2,17 @@
 @import '../../style/mixins/index.scss';
 @media all and (max-width: $max-width-750) {
   #headerWrap{
+    .main-wrap{
+      height: px2rem(120);
+    }
     .header-mobile-hide{
       display: none;
     }
     .header-mobile-show{
       display: block;
+    }
+    .logo-link{
+      height: px2rem(120);
     }
     .logo-link .icon{
       font-size: px2rem(90);
@@ -16,7 +22,7 @@
       top: px2rem(26);
       &::before{
         left: px2rem(-30);
-        top: px2rem(-56);
+        top: px2rem(5);
         height: px2rem(60);
       }
     }
