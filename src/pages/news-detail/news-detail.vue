@@ -25,7 +25,7 @@
         <div class="news-ad mobile-hide"><img src="../../assets/wx-gzh.png"/></div>
       </div>
 
-      <div class="breadcrumb main-wrap mobile-banner">
+      <div class="breadcrumb main-wrap mobile-banner mobile-show">
         <div class="main-wrap">
           <a class="crumb-link crumb-arrow" href="news.html">新闻动态</a>
           <span class="crumb-text" style="color: #177fff;">新闻详情</span>

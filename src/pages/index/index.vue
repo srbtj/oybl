@@ -158,7 +158,6 @@ import handleScroll from '../../mixins/index'
 import api from '@/fetch/api'
 
 let vm = null;
-// console.log(api)
 const swiperOptions = {
   autoplay: true,
   loop: true,
@@ -299,7 +298,6 @@ export default {
       this.showOrHideVideo = !this.showOrHideVideo;
     },
     handleClickSlide (index) {
-      console.log(index);
       this.playVideo(index)
     }
   },

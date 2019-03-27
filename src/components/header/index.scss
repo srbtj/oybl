@@ -11,6 +11,9 @@
   }
   .logo-link{
     position: relative;
+    display: inline-block;
+    height: $header-height;
+    vertical-align: top;
     .icon{
       position: absolute;
       font-size: 80px;
@@ -141,6 +144,7 @@
   z-index: 100 !important;
   width: 100%;
   animation: slideInDown .5s;
+  height: $header-height;
   // background: rgb(10, 15, 22);
 }
 @import './index-media.scss';
