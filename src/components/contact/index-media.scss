@@ -18,10 +18,11 @@
     .main-wrap {
       .contact-item{
         position: relative;
-        width: 100%;
+        width: px2rem(690) !important;
         padding: 0;
         height: px2rem(240);
         margin-bottom: px2rem(20);
+        // background: gold;
         &:last-child{
           margin-bottom: 0;
         }

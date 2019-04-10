@@ -230,7 +230,7 @@ export default {
       window.location.href = `news-detail.html?id=${id}`
     },
     gotoPT () {
-      window.location.href="javascript:;"
+      window.location.href="http://114.116.85.144:81"
     },
     goToNewsDetail (id) {
       window.location.href = `news-detail.html?id=${id}`

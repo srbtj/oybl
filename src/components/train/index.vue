@@ -47,7 +47,7 @@ export default {
           title: '中欧铁路东中西三条国际联运通道',
           desc: [
             {
-              icon: { name: 'icon-shuniu1'},
+              icon: { name: 'icon-shuniu'},
               numb: { start: 0, end: 43, duration: 3000},
               info: [
                 { txt: '个枢纽节点', clazz: 'txt-color' },
